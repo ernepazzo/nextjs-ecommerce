@@ -18,6 +18,7 @@ const Signin = () => {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            placeholder="Enter Email"
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
@@ -31,6 +32,7 @@ const Signin = () => {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            placeholder="Password"
           />
         </div>
         <div className="mb-3 form-check">
@@ -48,9 +50,9 @@ const Signin = () => {
         </button>
 
         <p className="my-2">
-          You dont't have an account?{" "}
+          You don't have an account?{" "}
           <Link href="/register">
-            <a style={{color: 'crimson'}}> Register</a>
+            <a style={{color: 'crimson'}}> Register Now</a>
           </Link>
         </p>
       </form>

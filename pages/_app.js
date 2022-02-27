@@ -1,12 +1,15 @@
-import Layout from '../components/Layout'
-import '../styles/globals.css'
+import Layout from "../components/Layout";
+import { DataProvider } from "../store/GlobalState";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  )
+    <DataProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </DataProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
