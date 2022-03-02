@@ -7,7 +7,7 @@ import { DataContext } from "../store/GlobalState";
 function NavBar() {
   const router = useRouter();
   const { state, dispatch } = useContext(DataContext);
-  const { auth } = state;
+  const { auth, cart } = state;
 
   const isActive = (r) => {
     if (r === router.pathname) {
@@ -82,11 +82,29 @@ function NavBar() {
           className="collapse navbar-collapse justify-content-end"
           id="navbarNavDropdown"
         >
-          <ul className="navbar-nav">
+          <ul className="navbar-nav p-1">
             <li className="nav-item">
               <Link href="/cart">
                 <a className={"nav-link" + isActive("/cart")}>
-                  <i className="fas fa-shopping-cart" aria-hidden="true"></i>{" "}
+                  <i
+                    className="fas fa-shopping-cart position-relative"
+                    aria-hidden="true"
+                  >
+                    <span
+                      className="position-absolute"
+                      style={{
+                        padding: "3px 6px",
+                        background: "#ed143dc2",
+                        borderRadius: "50%",
+                        top: "-10px",
+                        right: "-10px",
+                        color: "white",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {cart.length}
+                    </span>
+                  </i>{" "}
                   Cart
                 </a>
               </Link>

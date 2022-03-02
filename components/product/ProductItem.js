@@ -1,18 +1,31 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { useContext } from "react";
+import { DataContext } from "../../store/GlobalState";
+import { addToCart } from "../../store/Actions";
 
 const ProductItem = ({ product }) => {
+  const { state, dispatch } = useContext(DataContext);
+  const { cart } = state;
+
   const userLink = () => {
     return (
       <>
         <Link href={`product/${product._id}`}>
-          <a className='btn btn-info' style={{marginRight: '5px', flex: 1}}>View</a>
+          <a className="btn btn-info" style={{ marginRight: "5px", flex: 1 }}>
+            View
+          </a>
         </Link>
-        <button className='btn btn-success' style={{marginLeft: '5px', flex: 1}}>
+        <button
+          className="btn btn-success"
+          style={{ marginLeft: "5px", flex: 1 }}
+          disabled={product.inStock === 0 ? true : false}
+          onClick={() => dispatch(addToCart(product, cart))}
+        >
           Buy
         </button>
       </>
-    )
-  }
+    );
+  };
 
   console.log(product);
   return (
@@ -40,9 +53,7 @@ const ProductItem = ({ product }) => {
           {product.description}
         </p>
 
-        <div className="d-flex justify-content-between">
-          {userLink()}
-        </div>
+        <div className="d-flex justify-content-between">{userLink()}</div>
 
         {/* <a href="#" className="btn btn-primary">
           Go somewhere

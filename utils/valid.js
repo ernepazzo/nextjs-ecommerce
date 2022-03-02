@@ -5,7 +5,7 @@ const valid = (name, email, password, cf_password) => {
 
   if (password.length < 6) return "Password must be al least 6 characters.";
 
-  if (password !== cf_password) return "Confirm passwprd did not match.";
+  if (password !== cf_password) return "Confirm password did not match.";
 };
 
 const validateEmail = (email) => {
