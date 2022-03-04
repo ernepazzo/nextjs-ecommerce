@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 import { DataContext } from "../store/GlobalState";
+import { getData } from "../utils/fetchData";
 
 const Cart = () => {
   const { state, dispatch } = useContext(DataContext);
@@ -21,6 +22,33 @@ const Cart = () => {
 
     getTotal();
   }, [cart]);
+
+  useEffect(() => {
+    const cartLocal = JSON.parse(localStorage.getItem("__next__cart01__devat"));
+    if (cartLocal && cartLocal.length > 0) {
+      let newArr = [];
+      const updateCart = async () => {
+        for (const item of cartLocal) {
+          const res = await getData(`product/${item._id}`);
+          const { _id, title, images, price, inStock } = res.product;
+          if (inStock > 0) {
+            newArr.push({
+              _id,
+              title,
+              images,
+              price,
+              inStock,
+              quantity: item.quantity > inStock ? 1 : item.quantity,
+            });
+          }
+        }
+
+        dispatch({ type: "ADD_CART", payload: newArr });
+      };
+
+      updateCart();
+    }
+  }, []);
 
   if (cart.length === 0)
     return (
@@ -56,7 +84,7 @@ const Cart = () => {
 
       <div className="col-md-4 my-3 text-end text-uppercase text-secondary">
         <form action="">
-          <h2>Shopping</h2>
+          <h2>Shipping</h2>
           <label htmlFor="address">Address</label>
           <input
             type="text"
