@@ -31,7 +31,7 @@ export default async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
-        role: user.role,
+        rol: user.rol,
         avatar: user.avatar,
         root: user.root,
       },
